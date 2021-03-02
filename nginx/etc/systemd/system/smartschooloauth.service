@@ -1,0 +1,13 @@
+[Unit]
+Description=start smartschool oauth proxy
+After=network.target
+
+[Service]
+User=aboro
+Group=www-data
+WorkingDirectory=/home/aboro/projects/smartschooloauth
+Environment="PATH=/home/aboro/projects/smartschooloauth/venv/bin"
+ExecStart=/home/aboro/projects/smartschooloauth/run.py
+
+[Install]
+WantedBy=multi-user.target
