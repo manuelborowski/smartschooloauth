@@ -4,8 +4,9 @@ import logging.handlers, os, sys
 app = Flask(__name__, instance_relative_config=True)
 
 # V1.0 : copy from student-booklet
+# V1.1 : bugfix service-start-file
 
-app.config['version'] = 'V1.0'
+app.config['version'] = 'V1.1'
 
 # enable logging
 LOG_HANDLE = 'soauth'
