@@ -7,7 +7,7 @@ User=aboro
 Group=www-data
 WorkingDirectory=/home/aboro/projects/smartschooloauth
 Environment="PATH=/home/aboro/projects/smartschooloauth/venv/bin"
-ExecStart=/home/aboro/projects/smartschooloauth/venv/python run.py
+ExecStart=/home/aboro/projects/smartschooloauth/venv/bin/python run.py
 
 [Install]
 WantedBy=multi-user.target

@@ -5,8 +5,9 @@ app = Flask(__name__, instance_relative_config=True)
 
 # V1.0 : copy from student-booklet
 # V1.1 : bugfix service-start-file
+# V1.2 : small bugfixes
 
-app.config['version'] = 'V1.1'
+app.config['version'] = 'V1.2'
 
 # enable logging
 LOG_HANDLE = 'soauth'
