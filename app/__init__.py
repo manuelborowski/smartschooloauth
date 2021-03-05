@@ -7,8 +7,9 @@ app = Flask(__name__, instance_relative_config=True)
 # V1.1 : bugfix service-start-file
 # V1.2 : small bugfixes
 # V1.3 : bugfix redirect_uri
+# V1.4 : small bugfix
 
-app.config['version'] = 'V1.3'
+app.config['version'] = 'V1.4'
 
 # enable logging
 LOG_HANDLE = 'soauth'
