@@ -13,7 +13,7 @@ def login():
     if 'app_uri' in request.args:
         session['app_uri'] = request.args['app_uri']
         # Step 1 : go to smartschool so that the user can log in with smartschool credentials
-        redirect_uri = url_for('auth.login', _external=True, _scheme='https')
+        redirect_uri = url_for(app.config['REDIRECT_URI'])
         return oauth.smartschool.authorize_redirect(redirect_uri)
 
     if 'code' in request.args:  # received a request with a OAUTH code
