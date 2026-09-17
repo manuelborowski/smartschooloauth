@@ -8,8 +8,9 @@ app = Flask(__name__, instance_relative_config=True)
 # V1.2 : small bugfixes
 # V1.3 : bugfix redirect_uri
 # V1.4 : small bugfix
+# 1.5: small bugfix
 
-app.config['version'] = 'V1.4'
+app.config['version'] = 'V1.5'
 
 # enable logging
 LOG_HANDLE = 'soauth'
@@ -29,7 +30,7 @@ config_name = os.getenv('FLASK_CONFIG')
 config_name = config_name if config_name else 'production'
 
 # set up logging
-LOG_FILENAME = os.path.join(sys.path[0], app_config[config_name].STATIC_PATH, 'log/soauth-log.txt')
+LOG_FILENAME = os.path.join(sys.path[0], 'log/soauth-log.txt')
 try:
     log_level = getattr(logging, app_config[config_name].LOG_LEVEL)
 except:
