@@ -3,9 +3,12 @@ from app import log, app
 from . import auth
 import json
 from authlib.flask.client import OAuth
+from zeep import Client
 
 oauth = OAuth(app)
 smartschool = oauth.register('smartschool')
+
+soap = Client(app.config["SS_API_URL"])
 
 
 @auth.route('/', methods=['GET', 'POST'])
@@ -30,11 +33,19 @@ def smartschool_profile(token):
 
     if 'app_uri' in session:
         app_uri = session['app_uri']
-        profile = json.dumps(profile)
-        version = app.config['version']
-        uri = f'{app_uri}?profile={profile}&version={version}'
-        log.info(f'retrieved profile for {uri}')
-        return redirect(uri)
-
-    log.error('no app_uri found in session')
+        # compare received referenceID with user referenceID
+        ret = soap.service.getUserDetails( app.config["SS_API_KEY"], profile["internalnumber"])
+        user_details = json.loads(ret)
+        # log.info(user_details["referenceIdentifier"])
+        # log.info(profile["mainAccountReferenceID"])
+        # log.info(user_details["referenceIdentifier"] == profile["mainAccountReferenceID"])
+        if user_details["referenceIdentifier"] == profile["mainAccountReferenceID"]:
+            profile = json.dumps(profile)
+            version = app.config['version']
+            uri = f'{app_uri}?profile={profile}&version={version}'
+            log.info(f'retrieved profile for {uri}')
+            return redirect(uri)
+        log.error(f'SPOOFING: USER DETAILS: {user_details}       SS-PROFILE: {profile}')
+    else:
+        log.error('no app_uri found in session')
 
